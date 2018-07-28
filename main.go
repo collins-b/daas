@@ -75,6 +75,8 @@ func main() {
 
 	db.AutoMigrate(&Engineer{}, &EngineerPortfolio{})
 
+	log.Println("Server running at: http://127.0.0.1:3000")
+
 	router.HandleFunc("/api/engineers", GetEngineers).Methods("GET")
 	router.HandleFunc("/api/engineers/{id}", GetEngineer).Methods("GET")
 	router.HandleFunc("/api/engineers", CreateAccount).Methods("POST")
@@ -128,4 +130,18 @@ func CreatePortifolio(w http.ResponseWriter, r *http.Request) {
 	json.NewDecoder(r.Body).Decode(&details)
 	db.Create(&details)
 	json.NewEncoder(w).Encode(&details)
+}
+
+func EmployerAccountInfo(w http.ResponseWriter, r *http.Request) {
+	var employeraccount EmployerAccount
+	json.NewDecoder(r.Body).Decode(&employeraccount)
+	db.Create(&employeraccount)
+	json.NewEncoder(w).Encode(&employeraccount)
+}
+
+func EmployerDescriptionInfo(w http.ResponseWriter, r *http.Request) {
+	var employerdescription EmployerDescription
+	json.NewDecoder(r.Body).Decode(&employerdescription)
+	db.Create(&employerdescription)
+	json.NewEncoder(w).Encode(&employerdescription)
 }
