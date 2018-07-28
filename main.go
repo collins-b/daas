@@ -24,6 +24,35 @@ type Engineer struct {
 	Password     string
 }
 
+// EngineerPortfolio struct
+type EngineerPortfolio struct {
+	gorm.Model
+
+	Skills       string
+	Experience   string
+	Availability string
+}
+
+// EmployerAccount struct
+type EmployerAccount struct {
+	gorm.Model
+
+	Name         string
+	EmailAddress string
+	Username     string
+	Password     string
+}
+
+// EmployerDescription struct
+type EmployerDescription struct {
+	gorm.Model
+
+	Business       string
+	TeamSize       string
+	Location       string
+	Specialization string
+}
+
 var db *gorm.DB
 var err error
 
@@ -44,12 +73,14 @@ func main() {
 
 	defer db.Close()
 
-	db.AutoMigrate(&Engineer{})
+	db.AutoMigrate(&Engineer{}, &EngineerPortfolio{})
 
 	router.HandleFunc("/api/engineers", GetEngineers).Methods("GET")
 	router.HandleFunc("/api/engineers/{id}", GetEngineer).Methods("GET")
 	router.HandleFunc("/api/engineers", CreateAccount).Methods("POST")
 	router.HandleFunc("/api/engineers/{id}", DeleteAccount).Methods("DELETE")
+
+	router.HandleFunc("/api/engineers/details", CreatePortifolio).Methods("POST")
 
 	handler := cors.Default().Handler(router)
 
@@ -89,4 +120,12 @@ func DeleteAccount(w http.ResponseWriter, r *http.Request) {
 	var engineers []Engineer
 	db.Find(&engineers)
 	json.NewEncoder(w).Encode(&engineers)
+}
+
+// CreatePortifolio function
+func CreatePortifolio(w http.ResponseWriter, r *http.Request) {
+	var details EngineerPortfolio
+	json.NewDecoder(r.Body).Decode(&details)
+	db.Create(&details)
+	json.NewEncoder(w).Encode(&details)
 }
