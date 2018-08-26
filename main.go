@@ -132,6 +132,7 @@ func CreatePortifolio(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(&details)
 }
 
+// EmployerAccountInfo function
 func EmployerAccountInfo(w http.ResponseWriter, r *http.Request) {
 	var employeraccount EmployerAccount
 	json.NewDecoder(r.Body).Decode(&employeraccount)
@@ -139,6 +140,7 @@ func EmployerAccountInfo(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(&employeraccount)
 }
 
+// EmployerDescriptionInfo function
 func EmployerDescriptionInfo(w http.ResponseWriter, r *http.Request) {
 	var employerdescription EmployerDescription
 	json.NewDecoder(r.Body).Decode(&employerdescription)
