@@ -33,8 +33,8 @@ type EngineerPortfolio struct {
 	Availability string
 }
 
-// EmployerAccount struct
-type EmployerAccount struct {
+// ClientAccount struct
+type ClientAccount struct {
 	gorm.Model
 
 	Name         string
@@ -43,8 +43,8 @@ type EmployerAccount struct {
 	Password     string
 }
 
-// EmployerDescription struct
-type EmployerDescription struct {
+// ClientDescription struct
+type ClientDescription struct {
 	gorm.Model
 
 	Business       string
@@ -132,18 +132,19 @@ func CreatePortifolio(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(&details)
 }
 
-// EmployerAccountInfo function
-func EmployerAccountInfo(w http.ResponseWriter, r *http.Request) {
-	var employeraccount EmployerAccount
-	json.NewDecoder(r.Body).Decode(&employeraccount)
-	db.Create(&employeraccount)
-	json.NewEncoder(w).Encode(&employeraccount)
+// ClientAccountInfo function
+// Creates Client's info
+func ClientAccountInfo(w http.ResponseWriter, r *http.Request) {
+	var clientaccount ClientAccount
+	json.NewDecoder(r.Body).Decode(&clientaccount)
+	db.Create(&clientaccount)
+	json.NewEncoder(w).Encode(&clientaccount)
 }
 
-// EmployerDescriptionInfo function
-func EmployerDescriptionInfo(w http.ResponseWriter, r *http.Request) {
-	var employerdescription EmployerDescription
-	json.NewDecoder(r.Body).Decode(&employerdescription)
-	db.Create(&employerdescription)
-	json.NewEncoder(w).Encode(&employerdescription)
+// ClientDescriptionInfo function
+func ClientDescriptionInfo(w http.ResponseWriter, r *http.Request) {
+	var clientdescription ClientDescription
+	json.NewDecoder(r.Body).Decode(&clientdescription)
+	db.Create(&clientdescription)
+	json.NewEncoder(w).Encode(&clientdescription)
 }
