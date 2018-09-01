@@ -21,15 +21,6 @@ var CreateAccount = func(w http.ResponseWriter, r *http.Request) {
 	u.Respond(w, resp)
 }
 
-// var GetContactsFor = func(w http.ResponseWriter, r *http.Request) {
-
-// 	id := r.Context().Value("user").(uint)
-// 	data := models.GetContacts(id)
-// 	resp := u.Message(true, "success")
-// 	resp["data"] = data
-// 	u.Respond(w, resp)
-// }
-
 // // GetEngineers function
 // func GetEngineers(w http.ResponseWriter, r *http.Request) {
 // 	var engineers []Engineer

@@ -76,7 +76,7 @@ func main() {
 
 	// db.AutoMigrate(&Engineer{}, &EngineerPortfolio{})
 
-	// router.HandleFunc("/api/engineers", controllers.GetEngineers).Methods("GET")
+	router.HandleFunc("/api/engineers", controllers.GetAllEngineers).Methods("GET")
 	// router.HandleFunc("/api/engineers/{id}", controllers.GetEngineer).Methods("GET")
 	router.HandleFunc("/api/engineers", controllers.CreateAccount).Methods("POST")
 	// router.HandleFunc("/api/engineers/{id}", controllers.DeleteAccount).Methods("DELETE")
