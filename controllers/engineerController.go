@@ -9,18 +9,14 @@ import (
 )
 
 var CreateAccount = func(w http.ResponseWriter, r *http.Request) {
-
-	// user := r.Context().Value("user").(uint) //Grab the id of the user that send the request
 	engineer := &models.Engineer{}
 
 	err := json.NewDecoder(r.Body).Decode(engineer)
 	if err != nil {
-		u.Respond(w, u.Message(false, "Error while decoding request body"))
+		u.Respond(w, u.Message(false, "An error occured while decoding your request"))
 		fmt.Println(err)
 		return
 	}
-
-	// engineer.EngineerID = user
 	resp := engineer.Create()
 	u.Respond(w, resp)
 }
