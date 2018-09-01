@@ -2,6 +2,7 @@ package models
 
 import (
 	u "daas/utils"
+	"fmt"
 
 	"github.com/jinzhu/gorm"
 )
@@ -81,5 +82,6 @@ func (engineer *Engineer) Create() map[string]interface{} {
 
 	resp := u.Message(true, "success")
 	resp["engineer"] = engineer
+	fmt.Println(resp)
 	return resp
 }
