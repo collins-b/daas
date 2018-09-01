@@ -76,8 +76,6 @@ func main() {
 
 	// db.AutoMigrate(&Engineer{}, &EngineerPortfolio{})
 
-	log.Println("Server running at: http://127.0.0.1:3000")
-
 	// router.HandleFunc("/api/engineers", controllers.GetEngineers).Methods("GET")
 	// router.HandleFunc("/api/engineers/{id}", controllers.GetEngineer).Methods("GET")
 	router.HandleFunc("/api/engineers", controllers.CreateAccount).Methods("POST")
@@ -94,7 +92,7 @@ func main() {
 		port = "3000" //localhost
 	}
 
-	fmt.Println(port)
+	log.Println("Server running at: http://127.0.0.1:3000")
 
 	err := http.ListenAndServe(":"+port, router) //Launch the app, visit localhost:8000/api
 	if err != nil {
