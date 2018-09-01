@@ -85,3 +85,15 @@ func (engineer *Engineer) Create() map[string]interface{} {
 	fmt.Println(resp)
 	return resp
 }
+
+func GetEngineers() []*Engineer {
+
+	engineers := make([]*Engineer, 0)
+	err := GetDB().Table("engineers").Find(&engineers).Error
+	if err != nil {
+		fmt.Println(err)
+		return nil
+	}
+
+	return engineers
+}
