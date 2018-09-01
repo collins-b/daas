@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"daas/controllers"
+	"daas/internal"
 
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
@@ -76,9 +77,12 @@ func main() {
 
 	// db.AutoMigrate(&Engineer{}, &EngineerPortfolio{})
 
+	router.HandleFunc("/api/", controllers.GetAllEngineers).Methods("GET")
 	router.HandleFunc("/api/engineers", controllers.GetAllEngineers).Methods("GET")
 	router.HandleFunc("/api/engineers/{id}", controllers.GetEngineer).Methods("GET")
-	router.HandleFunc("/api/engineers", controllers.CreateAccount).Methods("POST")
+	router.HandleFunc("/api/users/signup", controllers.CreateAccount).Methods("POST")
+	router.HandleFunc("/api/users/login", controllers.Authenticate).Methods("POST")
+	router.Use(internal.JwtAuthentication)
 	// router.HandleFunc("/api/engineers/{id}", controllers.DeleteAccount).Methods("DELETE")
 
 	// router.HandleFunc("/api/engineers/details", CreatePortifolio).Methods("POST")
@@ -94,7 +98,7 @@ func main() {
 
 	log.Println("Server running at: http://127.0.0.1:3000")
 
-	err := http.ListenAndServe(":"+port, router) //Launch the app, visit localhost:8000/api
+	err := http.ListenAndServe(":"+port, router)
 	if err != nil {
 		fmt.Print(err)
 	}
