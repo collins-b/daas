@@ -16,7 +16,6 @@ type Engineer struct {
 	EmailAddress string
 	Username     string
 	Password     string
-	// EngineerID   uint `json:"engineer_id"`
 }
 
 // EngineerPortfolio struct
@@ -96,4 +95,15 @@ func GetEngineers() []*Engineer {
 	}
 
 	return engineers
+}
+
+func GetEngineer(id string) *Engineer {
+
+	engineer := &Engineer{}
+	err := GetDB().Table("engineers").Where("email_address = ?", id).First(engineer).Error
+	if err != nil {
+		return nil
+	}
+
+	return engineer
 }

@@ -77,7 +77,7 @@ func main() {
 	// db.AutoMigrate(&Engineer{}, &EngineerPortfolio{})
 
 	router.HandleFunc("/api/engineers", controllers.GetAllEngineers).Methods("GET")
-	// router.HandleFunc("/api/engineers/{id}", controllers.GetEngineer).Methods("GET")
+	router.HandleFunc("/api/engineers/{id}", controllers.GetEngineer).Methods("GET")
 	router.HandleFunc("/api/engineers", controllers.CreateAccount).Methods("POST")
 	// router.HandleFunc("/api/engineers/{id}", controllers.DeleteAccount).Methods("DELETE")
 
@@ -89,7 +89,7 @@ func main() {
 
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "3000" //localhost
+		port = "3000"
 	}
 
 	log.Println("Server running at: http://127.0.0.1:3000")
