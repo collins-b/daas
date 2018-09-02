@@ -13,9 +13,9 @@ type Engineer struct {
 
 	FirstName    string
 	LastName     string
-	EmailAddress string
-	Username     string
-	Password     string
+	Skills       string
+	Experience   string
+	Availability string
 }
 
 // EngineerPortfolio struct
@@ -31,10 +31,9 @@ type EngineerPortfolio struct {
 type ClientAccount struct {
 	gorm.Model
 
-	Name         string
-	EmailAddress string
-	Username     string
-	Password     string
+	Name     string
+	Username string
+	Password string
 }
 
 // ClientDescription struct
@@ -57,18 +56,15 @@ func (engineer *Engineer) Validate() (map[string]interface{}, bool) {
 		return u.Message(false, "Please provide your last name"), false
 	}
 
-	if engineer.EmailAddress == "" {
-		return u.Message(false, "Please provide your emaill address"), false
+	if engineer.Skills == "" {
+		return u.Message(false, "Please provide your skills"), false
 	}
 
-	if engineer.Username == "" {
-		return u.Message(false, "Please provide username"), false
+	if engineer.Experience == "" {
+		return u.Message(false, "Please provide your availability"), false
 	}
 
-	if engineer.Password == "" {
-		return u.Message(false, "Please provide password"), false
-	}
-	return u.Message(true, "Created an account successfully"), true
+	return u.Message(true, "Details saved successfully"), true
 }
 
 func (engineer *Engineer) Create() map[string]interface{} {

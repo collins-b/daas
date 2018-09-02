@@ -1,17 +1,25 @@
 package controllers
 
-// var CreateAccount = func(w http.ResponseWriter, r *http.Request) {
-// 	engineer := &models.Engineer{}
+import (
+	"daas/models"
+	u "daas/utils"
+	"encoding/json"
+	"fmt"
+	"net/http"
+)
 
-// 	err := json.NewDecoder(r.Body).Decode(engineer)
-// 	if err != nil {
-// 		u.Respond(w, u.Message(false, "An error occured while decoding your request"))
-// 		fmt.Println(err)
-// 		return
-// 	}
-// 	resp := engineer.Create()
-// 	u.Respond(w, resp)
-// }
+var EngineerDetails = func(w http.ResponseWriter, r *http.Request) {
+	engineer := &models.Engineer{}
+
+	err := json.NewDecoder(r.Body).Decode(engineer)
+	if err != nil {
+		u.Respond(w, u.Message(false, "An error occured while decoding your request"))
+		fmt.Println(err)
+		return
+	}
+	resp := engineer.Create()
+	u.Respond(w, resp)
+}
 
 // // GetEngineers function
 // func GetEngineers(w http.ResponseWriter, r *http.Request) {
