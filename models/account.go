@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/dgrijalva/jwt-go"
+	"github.com/gorilla/securecookie"
 	"github.com/jinzhu/gorm"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -25,6 +26,10 @@ type Account struct {
 	Password string `json:"password"`
 	Token    string `json:"token";sql:"-"`
 }
+
+var cookieHandler = securecookie.New(
+	securecookie.GenerateRandomKey(64),
+	securecookie.GenerateRandomKey(32))
 
 //Validate incoming user details...
 func (account *Account) Validate() (map[string]interface{}, bool) {
@@ -80,7 +85,6 @@ func (account *Account) Create() map[string]interface{} {
 }
 
 func Login(email, password string) map[string]interface{} {
-
 	account := &Account{}
 	err := GetDB().Table("accounts").Where("email = ?", email).First(account).Error
 	if err != nil {
@@ -99,9 +103,8 @@ func Login(email, password string) map[string]interface{} {
 	// Create token
 	tk := &Token{Email: account.Email}
 	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), tk)
-	tokenString, _ := token.SignedString([]byte(os.Getenv("ioo")))
+	tokenString, _ := token.SignedString([]byte(os.Getenv("")))
 	account.Token = tokenString
-
 	resp := u.Message(true, "Loogged in successfully")
 	resp["account"] = account
 	return resp
