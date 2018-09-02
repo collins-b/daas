@@ -46,6 +46,7 @@ type ClientDescription struct {
 	Specialization string
 }
 
+// Validate func
 func (engineer *Engineer) Validate() (map[string]interface{}, bool) {
 
 	if engineer.FirstName == "" {
@@ -67,6 +68,7 @@ func (engineer *Engineer) Validate() (map[string]interface{}, bool) {
 	return u.Message(true, "Details saved successfully"), true
 }
 
+// Create func
 func (engineer *Engineer) Create() map[string]interface{} {
 
 	if resp, ok := engineer.Validate(); !ok {
@@ -80,6 +82,7 @@ func (engineer *Engineer) Create() map[string]interface{} {
 	return resp
 }
 
+// GetEngineers func
 func GetEngineers() []*Engineer {
 
 	engineers := make([]*Engineer, 0)
@@ -92,6 +95,7 @@ func GetEngineers() []*Engineer {
 	return engineers
 }
 
+// GetEngineer func
 func GetEngineer(id string) *Engineer {
 
 	engineer := &Engineer{}

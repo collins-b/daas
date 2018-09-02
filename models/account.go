@@ -11,15 +11,13 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-/*
-JWT claims struct
-*/
+// Token struct for jwt claim
 type Token struct {
 	Email string
 	jwt.StandardClaims
 }
 
-//a struct to rep user account
+//Account func
 type Account struct {
 	gorm.Model
 	Email    string `json:"email"`
@@ -57,6 +55,7 @@ func (account *Account) Validate() (map[string]interface{}, bool) {
 	return u.Message(false, "Requirement passed"), true
 }
 
+// Create func
 func (account *Account) Create() map[string]interface{} {
 
 	if resp, ok := account.Validate(); !ok {
@@ -84,6 +83,7 @@ func (account *Account) Create() map[string]interface{} {
 	return response
 }
 
+// Login func
 func Login(email, password string) map[string]interface{} {
 	account := &Account{}
 	err := GetDB().Table("accounts").Where("email = ?", email).First(account).Error
@@ -110,6 +110,7 @@ func Login(email, password string) map[string]interface{} {
 	return resp
 }
 
+// GetUser func
 func GetUser(u uint) *Account {
 
 	acc := &Account{}
