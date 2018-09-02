@@ -81,6 +81,7 @@ func main() {
 	router.HandleFunc("/api/engineers", controllers.GetAllEngineers).Methods("GET")
 	router.HandleFunc("/api/engineers/{id}", controllers.GetEngineer).Methods("GET")
 	router.HandleFunc("/api/users/signup", controllers.CreateAccount).Methods("POST")
+	router.HandleFunc("/api/engineers/details", controllers.EngineerDetails).Methods("POST")
 	router.HandleFunc("/api/users/login", controllers.Authenticate).Methods("POST")
 	router.Use(internal.JwtAuthentication)
 	// router.HandleFunc("/api/engineers/{id}", controllers.DeleteAccount).Methods("DELETE")
