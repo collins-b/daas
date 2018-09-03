@@ -36,16 +36,6 @@ type ClientAccount struct {
 	Password string
 }
 
-// ClientDescription struct
-type ClientDescription struct {
-	gorm.Model
-
-	Business       string
-	TeamSize       string
-	Location       string
-	Specialization string
-}
-
 // Validate func
 func (engineer *Engineer) Validate() (map[string]interface{}, bool) {
 
