@@ -37,3 +37,11 @@ func errorHandler(w http.ResponseWriter, r *http.Request, status int) {
 		fmt.Fprint(w, "An engineer with that email address doesn't exist.")
 	}
 }
+
+var GetAllClients = func(w http.ResponseWriter, r *http.Request) {
+
+	data := models.GetClients()
+	resp := u.Message(true, "success")
+	resp["data"] = data
+	u.Respond(w, resp)
+}
