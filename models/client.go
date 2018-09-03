@@ -2,6 +2,7 @@ package models
 
 import (
 	u "daas/utils"
+	"fmt"
 
 	"github.com/jinzhu/gorm"
 )
@@ -50,4 +51,17 @@ func (client *Client) Create() map[string]interface{} {
 	resp := u.Message(true, "Success")
 	resp["client"] = client
 	return resp
+}
+
+// GetClients func
+func GetClients() []*Client {
+
+	clients := make([]*Client, 0)
+	err := GetDB().Table("clients").Find(&clients).Error
+	if err != nil {
+		fmt.Println(err)
+		return nil
+	}
+
+	return clients
 }
