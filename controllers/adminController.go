@@ -9,6 +9,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// Get all engineers
 var GetAllEngineers = func(w http.ResponseWriter, r *http.Request) {
 
 	data := models.GetEngineers()
@@ -17,6 +18,7 @@ var GetAllEngineers = func(w http.ResponseWriter, r *http.Request) {
 	u.Respond(w, resp)
 }
 
+// Get specific engineer
 var GetEngineer = func(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	id := params["id"]
@@ -31,6 +33,7 @@ var GetEngineer = func(w http.ResponseWriter, r *http.Request) {
 	u.Respond(w, resp)
 }
 
+// An error handler
 func errorHandler(w http.ResponseWriter, r *http.Request, status int) {
 	w.WriteHeader(status)
 	if status == http.StatusNotFound {
@@ -38,6 +41,7 @@ func errorHandler(w http.ResponseWriter, r *http.Request, status int) {
 	}
 }
 
+// Get all clients
 var GetAllClients = func(w http.ResponseWriter, r *http.Request) {
 
 	data := models.GetClients()
